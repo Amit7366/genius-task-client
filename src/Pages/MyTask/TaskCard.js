@@ -18,6 +18,21 @@ const TaskCard = ({ task,refetch }) => {
         });
 
   }
+
+  const handleDelete = id =>{
+    fetch(`http://localhost:5000/tasks/${id}`, {
+      method: 'DELETE', 
+
+  })
+  .then(res => res.json())
+  .then(data => {
+      if(data.deletedCount > 0){
+          refetch();
+          toast.success(`Task deleted successfully`)
+      }
+  })
+  }
+
   return (
     <div className="px-6 py-4 rounded-md shadow shadow-blue-100">
       <h2 className="font-medium ">{taskName}</h2>
@@ -25,7 +40,7 @@ const TaskCard = ({ task,refetch }) => {
       <div className="flex my-4 items-center">
         <div className="w-1/2 flex gap-4">
           <FaUserEdit className="text-blue-500"/>
-          <FaTrashAlt className="text-red-500"/>
+          <FaTrashAlt className="text-red-500" onClick={() => handleDelete(_id)}/>
         </div>
         <div className="w-1/2 text-right">
           {taskStatus === false ? (
