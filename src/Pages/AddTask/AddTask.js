@@ -35,6 +35,7 @@ const AddTask = () => {
           taskName: data.taskName,
           taskImage: imageData.data.url,
           taskUser: '',
+          taskStatus: false,
         }
 
         fetch('http://localhost:5000/tasks', {
