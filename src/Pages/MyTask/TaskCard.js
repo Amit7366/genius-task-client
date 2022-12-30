@@ -1,11 +1,12 @@
 import React from "react";
 import { toast } from "react-hot-toast";
 import { FaUserEdit, FaTrashAlt } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const TaskCard = ({ task,refetch }) => {
   const { _id, taskName, taskImage, taskUser, taskStatus } = task;
   const handleComplete = (id,taskStatus) =>{
-    fetch(`https://genius-task-server.vercel.app/tasks/${id}?status=${taskStatus}`, {
+    fetch(`http://localhost:5000/tasks/${id}?status=${taskStatus}`, {
         method: "PUT"
       })
         .then((res) => res.json())
@@ -19,7 +20,7 @@ const TaskCard = ({ task,refetch }) => {
   }
 
   const handleDelete = id =>{
-    fetch(`https://genius-task-server.vercel.app/tasks/${id}`, {
+    fetch(`http://localhost:5000/tasks/${id}`, {
       method: 'DELETE', 
 
   })
@@ -38,7 +39,7 @@ const TaskCard = ({ task,refetch }) => {
       <img className="w-full rounded-md h-36 object-cover" src={taskImage} alt="" />
       <div className="flex my-4 items-center">
         <div className="w-1/2 flex gap-4">
-          <FaUserEdit className="text-blue-500"/>
+          <Link to={`/tasks/${_id}`}><FaUserEdit className="text-blue-500"/></Link>
           <FaTrashAlt className="text-red-500" onClick={() => handleDelete(_id)}/>
         </div>
         <div className="w-1/2 text-right">

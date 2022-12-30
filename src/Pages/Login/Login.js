@@ -41,7 +41,7 @@ const Login = () => {
           }
     
           setLoginUserEmail(user.email);
-          fetch(`https://genius-task-server.vercel.app/users?email=${user.email}`)
+          fetch(`http://localhost:5000/users?email=${user.email}`)
           .then(res => res.json())
           .then(data =>{
             console.log(data);
@@ -59,7 +59,7 @@ const Login = () => {
 
       const saveUser = (name, email,role) =>{
         const user ={name, email,role};
-        fetch('https://genius-task-server.vercel.app/users', {
+        fetch('http://localhost:5000/users', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

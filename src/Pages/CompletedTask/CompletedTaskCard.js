@@ -13,7 +13,7 @@ const CompletedTaskCard = ({ task, refetch }) => {
       if (comment === "") {
         setCommentError("Comment cannot be empty!");
       } else {
-        fetch(`https://genius-task-server.vercel.app/comment/${task._id}?comment=${comment}`, {
+        fetch(`http://localhost:5000/comment/${task._id}?comment=${comment}`, {
             method: "PUT",
           })
             .then((res) => res.json())
@@ -29,7 +29,7 @@ const CompletedTaskCard = ({ task, refetch }) => {
 
   const { _id, taskName, taskImage, taskUser, taskStatus } = task;
   const handleComplete = (id, taskStatus) => {
-    fetch(`https://genius-task-server.vercel.app/tasks/${id}?status=${taskStatus}`, {
+    fetch(`http://localhost:5000/tasks/${id}?status=${taskStatus}`, {
       method: "PUT",
     })
       .then((res) => res.json())
@@ -42,7 +42,7 @@ const CompletedTaskCard = ({ task, refetch }) => {
   };
 
   const handleDelete = (id) => {
-    fetch(`https://genius-task-server.vercel.app/tasks/${id}`, {
+    fetch(`http://localhost:5000/tasks/${id}`, {
       method: "DELETE",
     })
       .then((res) => res.json())

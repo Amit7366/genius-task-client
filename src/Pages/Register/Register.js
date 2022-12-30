@@ -43,7 +43,7 @@ const Register = () => {
     
       const saveUser = (name, email,role) =>{
         const user ={name, email,role};
-        fetch('https://genius-task-server.vercel.app/users', {
+        fetch('http://localhost:5000/users', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

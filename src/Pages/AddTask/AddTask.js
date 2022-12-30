@@ -41,7 +41,7 @@ const AddTask = () => {
           taskStatus: false,
         }
 
-        fetch('https://genius-task-server.vercel.app/tasks', {
+        fetch('http://localhost:5000/tasks', {
                     method: 'POST',
                     headers: {
                         'content-type': 'application/json', 

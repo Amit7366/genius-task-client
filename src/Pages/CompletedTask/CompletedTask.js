@@ -15,7 +15,7 @@ const CompletedTask = () => {
   } = useQuery({
     queryKey: ["uid"],
     queryFn: async () => {
-      const res = await fetch(`https://genius-task-server.vercel.app/completed/tasks?uid=${user.uid}`);
+      const res = await fetch(`http://localhost:5000/completed/tasks?uid=${user.uid}`);
       const data = await res.json();
       return data;
     },
