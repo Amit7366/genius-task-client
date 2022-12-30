@@ -1,16 +1,18 @@
 import { useQuery } from "@tanstack/react-query";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import { AuthContext } from "../../Contexts/AuthProvider";
 import TaskCard from "./TaskCard";
 const MyTask = () => {
+  const { user } = useContext(AuthContext);
   const {
     data: tasks = [],
     refetch,
     isLoading,
   } = useQuery({
-    queryKey: ["tasks"],
+    queryKey: ["uid"],
     queryFn: async () => {
       const res = await fetch(
-        `http://localhost:5000/tasks`
+        `https://genius-task-server.vercel.app/tasks?uid=${user.uid}`
       );
       const data = await res.json();
       return data;

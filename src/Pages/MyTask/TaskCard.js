@@ -4,15 +4,14 @@ import { FaUserEdit, FaTrashAlt } from "react-icons/fa";
 
 const TaskCard = ({ task,refetch }) => {
   const { _id, taskName, taskImage, taskUser, taskStatus } = task;
-  const handleComplete = id =>{
-    fetch(`http://localhost:5000/tasks/${id}`, {
-        method: "PUT",
-        headers: {},
+  const handleComplete = (id,taskStatus) =>{
+    fetch(`https://genius-task-server.vercel.app/tasks/${id}?status=${taskStatus}`, {
+        method: "PUT"
       })
         .then((res) => res.json())
         .then((data) => {
           if (data.modifiedCount > 0) {
-            toast.success("Task successfuly Completed.");
+            toast.success("Task successfuly Updated.");
             refetch();
           }
         });
@@ -20,7 +19,7 @@ const TaskCard = ({ task,refetch }) => {
   }
 
   const handleDelete = id =>{
-    fetch(`http://localhost:5000/tasks/${id}`, {
+    fetch(`https://genius-task-server.vercel.app/tasks/${id}`, {
       method: 'DELETE', 
 
   })
@@ -44,11 +43,11 @@ const TaskCard = ({ task,refetch }) => {
         </div>
         <div className="w-1/2 text-right">
           {taskStatus === false ? (
-            <button onClick={()=>handleComplete(_id)} className="px-4 py-2 rounded-md text-xs bg-rose-500 text-white">
+            <button onClick={()=>handleComplete(_id,taskStatus)} className="px-4 py-2 rounded-md text-xs bg-rose-500 text-white">
               incomplete
             </button>
           ) : (
-            <button disabled className="px-4 py-2 rounded-md text-xs bg-green-500 text-white">
+            <button onClick={()=>handleComplete(_id,taskStatus)} className="px-4 py-2 rounded-md text-xs bg-green-500 text-white">
               completed
             </button>
           )}
